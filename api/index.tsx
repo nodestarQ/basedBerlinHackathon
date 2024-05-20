@@ -62,7 +62,7 @@ app.frame('/tx', (c) => {
       backgroundColor="background"
     >
       <img
-      src='/bg/processing.jpg'
+      src='/public/bg/processing.jpg'
       tw="absolute"
       height="100%"
     />
@@ -120,8 +120,8 @@ app.frame('/unseal', async (c) => {
   //SORT ARRAY COMMON 1-20 RARE 21-25
   let cardArray = [1,5,6,25,7];
   async function openPack(cards: number[]){
-    let commonurl = '/bg/common.jpg';
-    let rareurl = '/bg/rare.jpg';
+    let commonurl = '/public/bg/common.jpg';
+    let rareurl = '/public/bg/rare.jpg';
     let new_card = sortArrayByRarity(cards);
 
     if(state.count == 0){
@@ -131,7 +131,7 @@ app.frame('/unseal', async (c) => {
         backgroundColor="background"
       >
         <img
-        src='/bg/unseal.jpg'
+        src='/public/bg/unseal.jpg'
         tw="absolute"
         height="100%"
       />
@@ -151,7 +151,7 @@ app.frame('/unseal', async (c) => {
         height="100%"
       />
         <img
-        src={"/cards/"+new_card[state.count-1]+".jpg"}
+        src={"/public/cards/"+new_card[state.count-1]+".jpg"}
         tw="absolute"
         width="30%"
       />
@@ -164,32 +164,32 @@ app.frame('/unseal', async (c) => {
         backgroundColor="background"
       >
         <img
-        src='/bg/overview.jpg'
+        src='/public/bg/overview.jpg'
         tw="absolute"
         height="100%"
       />
       <img
-        src={"/cards/"+new_card[0]+".jpg"}
+        src={"/public/cards/"+new_card[0]+".jpg"}
         tw="absolute left-27% top-15%"
         width="15%"
       />
       <img
-        src={"/cards/"+new_card[1]+".jpg"}
+        src={"/public/cards/"+new_card[1]+".jpg"}
         tw="absolute left-35% bottom-5%"
         width="15%"
       />
       <img
-        src={"/cards/"+new_card[2]+".jpg"}
+        src={"/public/cards/"+new_card[2]+".jpg"}
         tw="absolute right-35% bottom-5%"
         width="15%"
       />
       <img
-        src={"/cards/"+new_card[3]+".jpg"}
+        src={"/public/cards/"+new_card[3]+".jpg"}
         tw="absolute right-27% top-15%"
         width="15%"
       />
       <img
-        src={"/cards/"+new_card[4]+".jpg"}
+        src={"/public/cards/"+new_card[4]+".jpg"}
         tw="absolute top-5%"
         width="15%"
       />
