@@ -14,7 +14,7 @@ type CardArray = number[];
 // export const config = {
 //   runtime: 'edge',
 // }
-
+const contractAddy = '0xa5D2D96CBB2f4fc2b493C60DB31104D77af9bf92'
 
 export const app = new Frog<{ State: State }>({
   initialState: {
@@ -37,8 +37,8 @@ app.frame('/', (c) => {
     action:'/tx',
     image: '/pack.jpg',
     intents: [
-      // <Button.Transaction target='/tx'>Get Pack</Button.Transaction>,
-      <Button action='/tx'>GET PACK</Button>
+      <Button.Transaction target='/init-unpack'>Get Pack</Button.Transaction>,
+      //<Button action='/tx'>GET PACK</Button>
     ],
   })
 })
@@ -50,7 +50,7 @@ app
     abi,
     functionName: 'open',
     chainId: 'eip155:8453',
-    to: '0xa5D2D96CBB2f4fc2b493C60DB31104D77af9bf92',
+    to: contractAddy, //
     value: parseEther('0.0011'),
   })
 })
