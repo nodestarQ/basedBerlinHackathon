@@ -14,7 +14,6 @@ type CardArray = number[];
 // export const config = {
 //   runtime: 'edge',
 // }
-const baseUrl = "";
 
 
 export const app = new Frog<{ State: State }>({
@@ -36,7 +35,7 @@ app.frame('/', (c) => {
   })
   return c.res({
     action:'/tx',
-    image: `${process.env.BASE_URL}/public/pack.jpg`,
+    image: '/public/pack.jpg',
     intents: [
       <Button.Transaction target='/tx'>Get Pack</Button.Transaction>,
     ],
@@ -46,9 +45,11 @@ app.frame('/', (c) => {
 app
 .transaction('/init-unpack', (c) => {
   // Send transaction response.
-  return c.send({
+  return c.contract({
+    abi,
+    functionName: 'open',
     chainId: 'eip155:10',
-    to: '0xd2135CfB216b74109775236E36d4b433F1DF507B',
+    to: '0xa5D2D96CBB2f4fc2b493C60DB31104D77af9bf92',
     value: parseEther('0'),
   })
 })
@@ -63,7 +64,7 @@ app.frame('/tx', (c) => {
       backgroundColor="background"
     >
       <img
-      src={`${process.env.BASE_URL}/public/bg/processing.jpg`}
+      src='/bg/processing.jpg'
       tw="absolute"
       height="100%"
     />
@@ -121,8 +122,8 @@ app.frame('/unseal', async (c) => {
   //SORT ARRAY COMMON 1-20 RARE 21-25
   let cardArray = [1,5,6,25,7];
   async function openPack(cards: number[]){
-    let commonurl = `${process.env.BASE_URL}/public/bg/common.jpg`;
-    let rareurl = `${process.env.BASE_URL}/public/bg/rare.jpg`;
+    let commonurl = '/bg/common.jpg';
+    let rareurl = '/bg/rare.jpg';
     let new_card = sortArrayByRarity(cards);
 
     if(state.count == 0){
@@ -132,7 +133,7 @@ app.frame('/unseal', async (c) => {
         backgroundColor="background"
       >
         <img
-        src={`${process.env.BASE_URL}/public/bg/unseal.jpg`}
+        src='/bg/unseal.jpg'
         tw="absolute"
         height="100%"
       />
@@ -152,7 +153,7 @@ app.frame('/unseal', async (c) => {
         height="100%"
       />
         <img
-        src={`${process.env.BASE_URL}/public/cards/`+new_card[state.count-1]+".jpg"}
+        src={"/cards/"+new_card[state.count-1]+".jpg"}
         tw="absolute"
         width="30%"
       />
@@ -165,32 +166,32 @@ app.frame('/unseal', async (c) => {
         backgroundColor="background"
       >
         <img
-        src={`${process.env.BASE_URL}/public/bg/overview.jpg`}
+        src='/bg/overview.jpg'
         tw="absolute"
         height="100%"
       />
       <img
-        src={`${process.env.BASE_URL}/public/cards/`+new_card[0]+".jpg"}
+        src={"/cards/"+new_card[0]+".jpg"}
         tw="absolute left-27% top-15%"
         width="15%"
       />
       <img
-        src={`${process.env.BASE_URL}/public/cards/`+new_card[1]+".jpg"}
+        src={"/cards/"+new_card[1]+".jpg"}
         tw="absolute left-35% bottom-5%"
         width="15%"
       />
       <img
-        src={`${process.env.BASE_URL}/public/cards/`+new_card[2]+".jpg"}
+        src={"/cards/"+new_card[2]+".jpg"}
         tw="absolute right-35% bottom-5%"
         width="15%"
       />
       <img
-        src={`${process.env.BASE_URL}/public/cards/`+new_card[3]+".jpg"}
+        src={"/cards/"+new_card[3]+".jpg"}
         tw="absolute right-27% top-15%"
         width="15%"
       />
       <img
-        src={`${process.env.BASE_URL}/public/cards/`+new_card[4]+".jpg"}
+        src={"/cards/"+new_card[4]+".jpg"}
         tw="absolute top-5%"
         width="15%"
       />
