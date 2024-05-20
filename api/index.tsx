@@ -37,7 +37,8 @@ app.frame('/', (c) => {
     action:'/tx',
     image: '/pack.jpg',
     intents: [
-      <Button.Transaction target='/tx'>Get Pack</Button.Transaction>,
+      // <Button.Transaction target='/tx'>Get Pack</Button.Transaction>,
+      <Button action='/tx'>GET PACK</Button>
     ],
   })
 })
