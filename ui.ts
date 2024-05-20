@@ -1,3 +1,3 @@
 import { createSystem } from 'frog/ui'
  
-export const { Box, Heading, Text, VStack, vars } = createSystem()
+export const { Image, Box, Heading, Text, VStack, vars } = createSystem()
