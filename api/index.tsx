@@ -35,7 +35,7 @@ app.frame('/', (c) => {
   })
   return c.res({
     action:'/tx',
-    image: 'https://ipfs.decentralized-content.com/ipfs/QmNf1UsmdGaMbpatQ6toXSkzDpizaGmC9zfunCyoz1enD5/penguin/4966.png',
+    image: './public/pack.jpg',
     intents: [
       <Button.Transaction target='/tx'>Get Pack</Button.Transaction>,
     ],
