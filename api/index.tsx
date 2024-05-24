@@ -17,7 +17,7 @@ type State = {
 const contractAddy = '0x60CBA89e86619Fa17cf7Ee3246982f30eb12388C';
 const graphApi = "https://acetcg.nodestarq.com";
 // const graphApi = "http://localhost:42069"
-const frameUrl = "https://acetcg.xyz/";
+const frameUrl = "https://based-berlin-hackathon.vercel.app/api/";
 
 export const app = new Frog<{ State: State }>({
   initialState: {
@@ -306,7 +306,6 @@ try {
   console.log("error: tx: ", error);
   // implement error handling
 }
-  let castIntent = "https://warpcast.com/~/compose?text=Look what I pulled from my ACE-TCG booster pack!&embeds[]="+frameUrl+state.pack.id
   function sortArrayByRarity(arr: number[]): number[] {
     if (arr.length !== 5) {
         throw new Error("Array must contain exactly 5 elements.");
