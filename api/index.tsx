@@ -30,7 +30,7 @@ export const app = new Frog<{ State: State }>({
   ui: { vars },
   assetsPath: '/',
   basePath: '/api',
-  imageAspectRatio: '1:1',
+  imageAspectRatio: '1:1'
   // Supply a Hub to enable frame verification.
   // hub: neynar({ apiKey: 'NEYNAR_FROG_FM' })
 })
@@ -45,8 +45,8 @@ app.frame('/', (c) => {
     image: '/pack.jpg',
     intents: [
       <Button.Transaction target='/init-unpack'>Get Pack</Button.Transaction>,
-      //<Button action='/tx'>GET PACK</Button>
     ],
+    title: 'Open your AceTCG Pack',
   })
 })
 
@@ -142,6 +142,7 @@ try {
       packData?(<Button action='/unseal'>UNSEAL</Button>):(<Button value={txId}>CHECK</Button>),
       <Button.Link href={'https://basescan.org/tx/'+txId}>view on Blockexplorer</Button.Link>,
     ],
+    title: 'Open your AceTCG Pack',
   })
 })
 
@@ -270,6 +271,7 @@ app.frame('/unseal', async (c) => {
       state.count == 6 && <Button.Link href="https://acetcg.xyz/">VISIT ACETCG ↗️</Button.Link>,
       state.count == 6 && <Button.Link href={castIntent}>SHARE YOUR PACK</Button.Link>
     ],
+    title: 'Open your AceTCG Pack',
   })
 })
 
@@ -422,6 +424,7 @@ try {
       <Button action="/" value='clear'>GET A PACK</Button>,
       state.count == 6 && <Button.Link href="https://acetcg.xyz/">VISIT ACETCG ↗️</Button.Link>
     ],
+    title: 'Open your AceTCG Pack',
   })
 })
 
