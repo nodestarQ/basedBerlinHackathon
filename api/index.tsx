@@ -111,6 +111,7 @@ try {
     let response = await request.json();
     let cards = response.data.boostersByIds.items[0].tokenIds;
     state.pack.cards = cards;
+    
     state.pack.id = Number(requestId);
     packData = true;
   
@@ -153,7 +154,7 @@ app.frame('/unseal', async (c) => {
     if (buttonValue === 'dec') previousState.count--
     if (buttonValue === 'clear') previousState = {count: 0, pack:{id:0,cards:[]}}
   })
-  let castIntent = "https://warpcast.com/~/compose?text=Look what I pulled from my ACE-TCG booster pack!&embeds[]="+frameUrl+state.pack.id
+  let castIntent = "https://warpcast.com/~/compose?text=Look%20what%20I%20pulled%20from%20my%20AceTCG%20booster%20pack&embeds[]="+frameUrl+state.pack.id
   function sortArrayByRarity(arr: number[]): number[] {
     if (arr.length !== 5) {
         throw new Error("Array must contain exactly 5 elements.");
@@ -186,7 +187,7 @@ app.frame('/unseal', async (c) => {
   async function openPack(cards: number[]){
     let commonurl = '/bg/common.jpg';
     let rareurl = '/bg/rare.jpg';
-    let new_card = sortArrayByRarity(cards);
+    let new_card = sortArrayByRarity(cardArray);
 
     if(state.count == 0){
       return (<Box
@@ -341,6 +342,7 @@ try {
     let commonurl = '/bg/common.jpg';
     let rareurl = '/bg/rare.jpg';
     let new_card = sortArrayByRarity(cards);
+    
 
     if(state.count == 0){
       return (<Box
