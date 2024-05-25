@@ -35,16 +35,56 @@ export const app = new Frog<{ State: State }>({
   // hub: neynar({ apiKey: 'NEYNAR_FROG_FM' })
 })
 
-app.frame('/', (c) => {
+app.frame('/', async (c) => {
   const { buttonValue, deriveState } = c
+  //check if array gets returned for id threshhold if true display sold out
+  let soldOut = false;
+  const query = `
+  query{boostersById(id: 10){
+    tokenIds
+    requestId
+  }}
+`;
+
+try {
+  const request = await fetch(graphApi, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ query })
+  });
+  let response = await request.json();
+  if(response.data.boostersById != undefined){
+    soldOut = true;
+  }
+
+  console.log(soldOut);
+} catch (error) {
+  console.log("error: tx: ", error);
+  // implement error handling
+}
+
   const state:any = deriveState(previousState => {
     if (buttonValue === 'clear') previousState = {count: 0, pack:{id:0,cards:[]}}
   })
   return c.res({
     action:'/tx',
-    image: '/pack.jpg',
+    image: (<Box
+      grow
+      alignHorizontal="center"
+      backgroundColor="background"
+    >
+      <img
+      src='/bg/pack.jpg'
+      tw="absolute"
+      height="100%"
+    />
+    <h1 tw="absolute">UNSEAL</h1>
+    </Box>),
     intents: [
-      <Button.Transaction target='/init-unpack'>Get Pack</Button.Transaction>,
+      !soldOut && <Button.Transaction target='/init-unpack'>Get Pack</Button.Transaction>,
+      soldOut && <Button>SOLD OUT</Button>
     ],
     title: 'Open your AceTCG Pack',
   })
