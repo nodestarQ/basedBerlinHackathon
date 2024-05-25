@@ -137,7 +137,7 @@ try {
       height="100%"
     />
     <h1 tw="absolute">PREPARING PACK</h1>
-    <h5 tw="absolute bottom-5%">Wait a couple of seconds and then press unseal</h5>
+    <h5 tw="absolute bottom-5%">Wait a couple of seconds and press CHECK until it turns into UNSEAL</h5>
     </Box>),
     intents: [
       packData?(<Button action='/unseal'>UNSEAL</Button>):(<Button value={txId}>CHECK</Button>),
