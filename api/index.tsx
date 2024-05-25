@@ -286,10 +286,10 @@ app.frame('/share/:id', async (c) => {
   })
   const query = `
   {
-    boostersById(
-      id: `+id+`
-    ) {
-      tokenIds
+    boostersByIds(where: {requestId: "`+id+`"}) {
+      items {
+        tokenIds
+      }
     }
   }
 `;
@@ -303,7 +303,8 @@ try {
     body: JSON.stringify({ query })
   });
   let response = await request.json();
-  let cards = response.data.boostersById.tokenIds;
+  console.log(response)
+  let cards = response.data.boostersByIds.items[0].tokenIds;
   state.pack.cards = cards;
 } catch (error) {
   console.log("error: tx: ", error);
@@ -338,6 +339,7 @@ try {
 }
   //SORT ARRAY COMMON 1-20 RARE 21-25
   let cardArray = state.pack.cards;
+  console.log(cardArray)
   async function openPack(cards: number[]){
     let commonurl = '/bg/common.jpg';
     let rareurl = '/bg/rare.jpg';
