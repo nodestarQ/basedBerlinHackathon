@@ -154,7 +154,7 @@ app.frame('/unseal', async (c) => {
     if (buttonValue === 'dec') previousState.count--
     if (buttonValue === 'clear') previousState = {count: 0, pack:{id:0,cards:[]}}
   })
-  let castIntent = "https://warpcast.com/~/compose?text=Look%20what%20I%20pulled%20from%20my%20AceTCG%20booster%20pack&embeds[]="+frameUrl+state.pack.id
+  let castIntent = "https://warpcast.com/~/compose?text=Look%20what%20I%20pulled%20from%20my%20AceTCG%20booster%20pack&embeds[]="+frameUrl+"share/"+state.pack.id
   function sortArrayByRarity(arr: number[]): number[] {
     if (arr.length !== 5) {
         throw new Error("Array must contain exactly 5 elements.");
@@ -303,7 +303,6 @@ try {
     body: JSON.stringify({ query })
   });
   let response = await request.json();
-  console.log(response)
   let cards = response.data.boostersByIds.items[0].tokenIds;
   state.pack.cards = cards;
 } catch (error) {
