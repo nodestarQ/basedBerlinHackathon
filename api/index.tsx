@@ -73,7 +73,7 @@ try {
     image: '/pack.jpg',
     intents: [
       !soldOut && <Button.Transaction target='/init-unpack'>Get Pack</Button.Transaction>,
-      soldOut && <Button>SOLD OUT</Button>
+      soldOut && <Button action='/'>SOLD OUT</Button>
     ],
     title: 'Open your AceTCG Pack',
   })
