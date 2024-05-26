@@ -55,7 +55,7 @@ try {
     body: JSON.stringify({ query })
   });
   let response = await request.json();
-  if(response.data.boostersById == undefined){
+  if(response.data.boostersById != undefined){
     soldOut = true;
   }
 
