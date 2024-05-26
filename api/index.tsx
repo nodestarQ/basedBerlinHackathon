@@ -55,7 +55,7 @@ try {
     body: JSON.stringify({ query })
   });
   let response = await request.json();
-  if(response.data.boostersById != undefined){
+  if(response.data.boostersById == undefined){
     soldOut = true;
   }
 
@@ -70,18 +70,7 @@ try {
   })
   return c.res({
     action:'/tx',
-    image: (<Box
-      grow
-      alignHorizontal="center"
-      backgroundColor="background"
-    >
-      <img
-      src='/bg/pack.jpg'
-      tw="absolute"
-      height="100%"
-    />
-    <h1 tw="absolute">UNSEAL</h1>
-    </Box>),
+    image: '/pack.jpg',
     intents: [
       !soldOut && <Button.Transaction target='/init-unpack'>Get Pack</Button.Transaction>,
       soldOut && <Button>SOLD OUT</Button>
