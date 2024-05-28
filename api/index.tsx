@@ -3,7 +3,7 @@ import { devtools } from 'frog/dev'
 import { serveStatic } from 'frog/serve-static'
 // import { neynar } from 'frog/hubs'
 import { handle } from 'frog/vercel'
-import { Box, Heading, Text, VStack, vars, Image} from '../ui.js'
+import { Box, vars} from '../ui.js'
 import {abi} from '../contract/abi/abi.js'
 
 type PackState = {
@@ -18,6 +18,7 @@ const contractAddy = '0x60CBA89e86619Fa17cf7Ee3246982f30eb12388C';
 const graphApi = "https://acetcg.nodestarq.com";
 // const graphApi = "http://localhost:42069"
 const frameUrl = "https://based-berlin-hackathon.vercel.app/api/";
+const maxCap = 10;
 
 export const app = new Frog<{ State: State }>({
   initialState: {
@@ -38,13 +39,29 @@ export const app = new Frog<{ State: State }>({
 app.frame('/', async (c) => {
   const { buttonValue, deriveState } = c
   //check if array gets returned for id threshhold if true display sold out
+  //TODO: replace this with a better check
   let soldOut = false;
   const query = `
-  query{boostersById(id: 10){
+  query{boostersById(id: `+maxCap+`){
     tokenIds
     requestId
   }}
 `;
+
+const sellOutState = () => {
+  return (<Box
+    grow
+    alignHorizontal="center"
+    backgroundColor="background"
+  >
+    <img
+    src='/pack.jpg'
+    tw="absolute"
+    height="100%"
+  />
+  <h1 tw="absolute">SOLD OUT</h1>
+  </Box>)
+}
 
 try {
   const request = await fetch(graphApi, {
@@ -70,7 +87,7 @@ try {
   })
   return c.res({
     action:'/tx',
-    image: '/pack.jpg',
+    image: (soldOut?sellOutState():'/pack.webp'),
     intents: [
       !soldOut && <Button.Transaction target='/init-unpack'>Get Pack</Button.Transaction>,
       soldOut && <Button action='/'>SOLD OUT</Button>
