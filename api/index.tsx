@@ -87,7 +87,7 @@ try {
   })
   return c.res({
     action:'/tx',
-    image: (soldOut?sellOutState():'/pack.webp'),
+    image: (soldOut?sellOutState():'/pack.jpg'),
     intents: [
       !soldOut && <Button.Transaction target='/init-unpack'>Get Pack</Button.Transaction>,
       soldOut && <Button action='/'>SOLD OUT</Button>
